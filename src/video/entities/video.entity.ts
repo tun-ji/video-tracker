@@ -1,7 +1,7 @@
 import { type } from "os";
-import { TasksModule } from "src/tasks/tasks.module";
-import { Task } from "src/tasks/tasks/entities/task.entity";
-import { User } from "src/users/users/entities/user.entity";
+import { Task } from "src/task/entities/task.entity";
+import { TasksModule } from "src/task/tasks.module";
+import { User } from "src/user/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Url } from "url";
 

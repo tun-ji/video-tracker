@@ -1,4 +1,4 @@
-import { Video } from "src/videos/videos/entities/video.entity";
+import { Video } from "src/video/entities/video.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
