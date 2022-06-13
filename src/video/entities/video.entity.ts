@@ -1,33 +1,31 @@
-import { type } from "os";
+import { Status } from "@app/status/entities/status.entity";
 import { Task } from "src/task/entities/task.entity";
-import { TasksModule } from "src/task/tasks.module";
 import { User } from "src/user/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Url } from "url";
 
-@Entity()
+@Entity({name: 'videos'})
 export class Video {
     @PrimaryGeneratedColumn()
     vid_id: number;
 
     @Column()
-    thumbnail: Url;
+    thumbnail: string;
 
     @Column()
     title: string;
 
-    @Column()
-    status: string;
+    @ManyToOne(() => Status, (status) => status.video)
+    status: Status
 
     @Column()
     publish_date: Date;
 
     @Column()
-    url: Url;
+    url: string;
 
     @OneToMany(() => Task, (task) => task.video)
     tasks: Task[]
 
-    @ManyToOne(type => User, user => user.videos) 
+    @ManyToOne(() => User, (user) => user.videos) 
     user: User;
-}
+}   

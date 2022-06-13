@@ -1,7 +1,7 @@
 import { Video } from "src/video/entities/video.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity({name: 'tasks'})
 export class Task {
     @PrimaryGeneratedColumn()
     task_no: number;

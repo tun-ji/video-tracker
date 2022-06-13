@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TasksModule } from './task/tasks.module';
-import { UsersModule } from './user/users.module';
-import { VideosModule } from './video/videos.module';
-;
+import { AppController } from '@app/app.controller';
+import { AppService } from '@app/app.service';
+import { TasksModule } from '@app/task/tasks.module';
+import { UsersModule } from '@app/user/users.module';
+import { VideosModule } from '@app/video/videos.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { StatusModule } from './status/status.module';
+import ormconfig from './ormconfig';
+
 
 @Module({
-  imports: [VideosModule, , UsersModule, TasksModule],
+  imports: [TypeOrmModule.forRoot(ormconfig),VideosModule , UsersModule, TasksModule, StatusModule],
   controllers: [AppController],
   providers: [AppService],
 })
