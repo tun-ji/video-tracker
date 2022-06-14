@@ -1,5 +1,5 @@
-import { Status } from "@app/status/entities/status.entity"
 import { Task } from "@app/task/entities/task.entity"
+import { Status } from "../video.types"
 
 export class videoResponseInterface {
     video: {

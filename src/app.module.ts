@@ -5,12 +5,12 @@ import { TasksModule } from '@app/task/tasks.module';
 import { UsersModule } from '@app/user/users.module';
 import { VideosModule } from '@app/video/videos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { StatusModule } from './status/status.module';
+import { SponsorsModule } from './sponsors/sponsors.module';
 import ormconfig from './ormconfig';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(ormconfig),VideosModule , UsersModule, TasksModule, StatusModule],
+  imports: [TypeOrmModule.forRoot(ormconfig),VideosModule , UsersModule, TasksModule, SponsorsModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,7 +1,8 @@
-import { Status } from "@app/status/entities/status.entity";
+import { Sponsor } from "@app/sponsors/entities/sponsor.entity";
 import { Task } from "src/task/entities/task.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Status } from "../video.types";
 
 @Entity({name: 'videos'})
 export class Video {
@@ -14,7 +15,7 @@ export class Video {
     @Column()
     title: string;
 
-    @ManyToOne(() => Status, (status) => status.video)
+    @Column({ type: 'enum', enum: Status, default: Status.Idea})
     status: Status
 
     @Column()

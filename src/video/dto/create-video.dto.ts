@@ -1,4 +1,3 @@
-import { Status } from "@app/status/entities/status.entity"
 import { IsNotEmpty } from "class-validator"
 
 export class CreateVideoDto {
