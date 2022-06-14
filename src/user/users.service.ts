@@ -72,4 +72,8 @@ export class UsersService {
     }
   // if the email is in the repository, check if the password is correct. If it's not, return user.
   }
+
+  async findById(id: string): Promise<User> {
+    return await this.userRepository.findOne(id)
+  }
 }
