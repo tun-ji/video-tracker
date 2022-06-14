@@ -8,6 +8,7 @@ import { JWT_SECRET } from '@app/config';
 import { userResponseInterface } from './types/UserResponseInterface.types';
 import { loginDto } from './dto/login-user.dto';
 import { compare } from 'bcrypt'
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 @Injectable()
@@ -72,6 +73,13 @@ export class UsersService {
     }
   // if the email is in the repository, check if the password is correct. If it's not, return user.
   }
+
+  async update(user_ID: number, updateUser: UpdateUserDto): Promise<User> {
+    const User = await this.userRepository.findOne(user_ID)
+    Object.assign(User, updateUser)
+    return await this.userRepository.save(User)
+  }
+
 
   async findById(id: string): Promise<User> {
     return await this.userRepository.findOne(id)
