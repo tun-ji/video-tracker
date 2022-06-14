@@ -1,5 +1,6 @@
 import { Video } from "src/video/entities/video.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { hash } from 'bcrypt'
 
 @Entity({name: 'users'})
 export class User {
@@ -9,14 +10,22 @@ export class User {
     @Column()
     email: string;
 
-    @Column()
+    @Column({ select: false })
     password: string;
+
+    @BeforeInsert()
+    async passwordHashing() {
+        this.password = await hash(this.password, 15)
+    }
 
     @Column()
     firstName: string;
 
     @Column()
     lastName: string;
+
+    @Column()
+    username: string;
 
     @OneToMany(type => Video, video => video.user) 
     videos: Video[]

@@ -6,7 +6,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 @Entity({name: 'videos'})
 export class Video {
     @PrimaryGeneratedColumn()
-    vid_id: number;
+    vid_id: string;
 
     @Column()
     thumbnail: string;
