@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ValidationPipe, UsePipes, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ValidationPipe, UsePipes, Put, Query } from '@nestjs/common';
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
@@ -7,10 +7,16 @@ import { videoResponseInterface } from './types/videoResponseInterface.types';
 import { UserDec } from '@app/user/decorators/user.decorator';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { User } from '@app/user/entities/user.entity';
+import { VideoFeedInterface } from './types/videoFeedInterface.types';
 
 @Controller('videos')
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
+
+  @Get()
+  async findAll(@UserDec('user_id') curr_userId: number, @Query() query: any): Promise<VideoFeedInterface>{
+    return await this.videosService.returnVideosBy(curr_userId, query)
+  }
 
   @Post()
   @UsePipes(new ValidationPipe())

@@ -2,12 +2,13 @@ import { Task } from '@app/task/entities/task.entity';
 import { User } from '@app/user/entities/user.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { Video } from './entities/video.entity';
 import { videoResponseInterface } from './types/videoResponseInterface.types';
 import slugify from 'slugify';
+import { VideoFeedInterface } from './types/videoFeedInterface.types';
 
 @Injectable()
 export class VideosService {
@@ -44,6 +45,31 @@ export class VideosService {
         else {
             return video
         }
+    }
+
+    async returnVideosBy(reqUserID: number, query: any): Promise<VideoFeedInterface> {
+        const queryBuilder = getRepository(Video)
+        .createQueryBuilder('videos')
+        .leftJoinAndSelect('videos.user', 'user_id')
+
+        if (query.status) {
+            queryBuilder.andWhere('videos.status = :status', {
+                status: `${query.status}`
+            } )
+        }
+
+        queryBuilder.orderBy('videos.publish_date', 'DESC')
+
+        const videoCount = await queryBuilder.getCount()
+
+        if (query.limit) {
+            queryBuilder.limit(query.limit)
+        }
+        
+        const videos = await queryBuilder.getMany()
+
+        return {videos, videoCount}
+
     }
 
     async updateVideo(user: User, updateVideoDto: UpdateVideoDto, slug: string): Promise<Video> {
