@@ -14,6 +14,7 @@ export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
   @Get()
+  @UseGuards(AuthGuard)
   async findAll(@UserDec('user_id') curr_userId: number, @Query() query: any): Promise<VideoFeedInterface>{
     return await this.videosService.returnVideosBy(curr_userId, query)
   }

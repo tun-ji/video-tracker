@@ -50,7 +50,11 @@ export class VideosService {
     async returnVideosBy(reqUserID: number, query: any): Promise<VideoFeedInterface> {
         const queryBuilder = getRepository(Video)
         .createQueryBuilder('videos')
-        .leftJoinAndSelect('videos.user', 'user_id')
+        .leftJoinAndSelect('videos.user', 'user')
+        .where('user.user_id = :user_id', {
+            user_id: `${reqUserID}`
+        })
+
 
         if (query.status) {
             queryBuilder.andWhere('videos.status = :status', {
