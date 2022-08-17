@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator"
+import { Status } from "../types/video.types"
 
 export class CreateVideoDto {
 
@@ -11,5 +12,8 @@ export class CreateVideoDto {
 
     readonly url: string
 
+    readonly status: Status
+
     readonly channel: string
+
 }

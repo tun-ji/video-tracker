@@ -136,3 +136,12 @@ dist
 # TernJS port file
 .tern-port
 >>>>>>> 528639acfd0e478b643f4ef55f25cfb6f0399e58
+
+
+# Migrations
+src/Migrations
+
+
+# Config files
+src/ormconfig.ts
+src/config.ts

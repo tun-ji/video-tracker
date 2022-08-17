@@ -1,9 +1,11 @@
 import { Task } from "@app/task/entities/task.entity"
-import { Status } from "../video.types"
+import { Status } from "./video.types"
 
 export class videoResponseInterface {
     video: {
-        readonly vid_id: string
+        readonly vid_id: number
+
+        readonly slug: string
     
         readonly thumbnail: string
     
@@ -15,12 +17,11 @@ export class videoResponseInterface {
     
         readonly url: string
 
+        readonly created_at: Date
+
+        readonly updated_at: Date
+
         readonly tasks: Task[]
     }
 }
 
-// export class videoResponseInterface {
-//     video: {
-//         Video
-//     }
-// }
