@@ -1,3 +1,11 @@
+I wrote this API because so I could develop a system to help me manage the process of creating YouTube videos. With this, I can track the status of a video from conception to publishing. It's still a work in progress.
+
+
+
+
+
+
+
 # Endpoints
 
 ## List Videos
